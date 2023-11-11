@@ -1,0 +1,38 @@
+.profile-container {
+  margin-top: 20px;
+}
+
+.profile-nav {
+  margin-bottom: 20px;
+}
+
+.profile-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.profile-heading {
+  background-color: #f8f9fa;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+}
+
+.profile-title {
+  margin-top: 10px;
+}
+
+.profile-list li.active {
+  background-color: #8eb6e0;
+  color: white;
+}
+
+.bio-graph-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bio-graph-title {
+  color: #007bff !important;
+  font-weight: bold;
+}
