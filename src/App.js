@@ -17,7 +17,7 @@ import OrderDetails from "./components/OrderList/OrderDetail";
 import StoreBio from "./components/StoreList/StoreBio";
 import StoreService from "./components/StoreList/StoreService";
 import { AppProvider } from "./ContextProvider";
-
+import TagManagement from "./components/TagList/TagManagement";
 const App = () => {
   return (
     <BrowserRouter>
@@ -29,6 +29,7 @@ const App = () => {
             <Route path="/store" element={<Store />} />
             <Route path="/user" element={<User />} />
             <Route path="/storemanager" element={<StoreManager />} />
+            <Route path="/tagManagement" element={<TagManagement />} />
             <Route path="/userDetails/:id" element={<UserProfile />} />
             <Route
               path="/storeDetails/:id/bio"
@@ -48,7 +49,6 @@ const App = () => {
                 </>
               }
             />
-
             <Route path="/OrderDetails/:id" element={<OrderDetails />} />
           </Routes>
         </AppProvider>

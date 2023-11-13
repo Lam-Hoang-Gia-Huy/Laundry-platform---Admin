@@ -29,6 +29,12 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
+    title: "Tag Management",
+    path: "/tagManagement",
+    icon: <BiIcons.BiLogOut />,
+    cName: "nav-text",
+  },
+  {
     title: "Logout",
     path: "/logout",
     icon: <BiIcons.BiLogOut />,

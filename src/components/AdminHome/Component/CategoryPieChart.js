@@ -39,7 +39,7 @@ const CategoryPieChart = () => {
         options={options}
         colors={colors}
         height={"243px"}
-        width={"700px"}
+        width={"500px"}
         className="custom-pie-chart"
       />
     </>

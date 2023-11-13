@@ -11,13 +11,17 @@ const Sidebar = ({ children }) => {
     <div className="container1">
       <div style={{ width: isOpen ? "300px" : "50px" }} className="sidebar">
         <div className="top_section">
-          <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
-            <img src="https://res.cloudinary.com/df6mibrwv/image/upload/v1698172847/xeasuevjyadfgzuj25jx.png" />
-          </h1>
-          <div
-            style={{ marginLeft: isOpen ? "130px" : "0px" }}
-            className="bars"
-          >
+          <img
+            src="https://res.cloudinary.com/df6mibrwv/image/upload/v1698172847/xeasuevjyadfgzuj25jx.png"
+            style={{
+              display: isOpen ? "block" : "none",
+              margin: "-10px 5px -20px 30px",
+              width: "60%",
+              height: "auto",
+            }}
+            className="logo"
+          />
+          <div style={{ marginLeft: isOpen ? "30px" : "0px" }} className="bars">
             <FaBars onClick={toggle} />
           </div>
         </div>
