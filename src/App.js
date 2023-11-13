@@ -17,6 +17,7 @@ import OrderDetails from "./components/OrderList/OrderDetail";
 import StoreBio from "./components/StoreList/StoreBio";
 import StoreService from "./components/StoreList/StoreService";
 import { AppProvider } from "./ContextProvider";
+import Login from "./components/Login";
 
 const App = () => {
   return (
@@ -24,7 +25,8 @@ const App = () => {
       <Sidebar>
         <AppProvider>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home/>} />
+            <Route path="/login" element={<Login/>}/>
             <Route path="/order" element={<Order />} />
             <Route path="/store" element={<Store />} />
             <Route path="/user" element={<User />} />
