@@ -17,8 +17,12 @@ import OrderDetails from "./components/OrderList/OrderDetail";
 import StoreBio from "./components/StoreList/StoreBio";
 import StoreService from "./components/StoreList/StoreService";
 import { AppProvider } from "./ContextProvider";
+<<<<<<< HEAD
 import Login from "./components/Login";
 
+=======
+import TagManagement from "./components/TagList/TagManagement";
+>>>>>>> 4654386c7cde6e551a06dbde3a9a5c11e8360551
 const App = () => {
   return (
     <BrowserRouter>
@@ -31,6 +35,7 @@ const App = () => {
             <Route path="/store" element={<Store />} />
             <Route path="/user" element={<User />} />
             <Route path="/storemanager" element={<StoreManager />} />
+            <Route path="/tagManagement" element={<TagManagement />} />
             <Route path="/userDetails/:id" element={<UserProfile />} />
             <Route
               path="/storeDetails/:id/bio"
@@ -50,7 +55,6 @@ const App = () => {
                 </>
               }
             />
-
             <Route path="/OrderDetails/:id" element={<OrderDetails />} />
           </Routes>
         </AppProvider>

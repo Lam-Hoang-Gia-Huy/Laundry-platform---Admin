@@ -1,5 +1,8 @@
 import React from "react";
+<<<<<<< HEAD
 // import "../Web.css";
+=======
+>>>>>>> 4654386c7cde6e551a06dbde3a9a5c11e8360551
 import * as TiIcons from "react-icons/ti";
 import * as GiIcons from "react-icons/gi";
 import { NavLink } from "react-router-dom";

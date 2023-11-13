@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 // import "../Web.css";
+=======
+>>>>>>> 4654386c7cde6e551a06dbde3a9a5c11e8360551
 import { NavLink } from "react-router-dom";
 import { MDBDataTable } from "mdbreact";
 import { Link } from "react-router-dom";
@@ -12,9 +15,9 @@ import * as ImIconS from "react-icons/im";
 
 function Store() {
   const { stores, setStores } = useContext(AppContext);
-  const filteredStores = stores.filter(
-    (store) => store.status === "on" || store.status === "off"
-  );
+  // const filteredStores = stores.filter(
+  //   (store) => store.status === "on" || store.status === "off"
+  // );
 
   const columns = [
     {
@@ -24,7 +27,7 @@ function Store() {
     },
     {
       label: "STORENAME",
-      field: "storename",
+      field: "name",
       sort: "asc",
     },
     {
@@ -55,18 +58,12 @@ function Store() {
   ];
   // First, create a state variable for the switch states.
   const [switchStates, setSwitchStates] = useState(
-    filteredStores.reduce(
-      (acc, store) => ({ ...acc, [store.id]: store.status }),
-      {}
-    )
+    stores.reduce((acc, store) => ({ ...acc, [store.id]: store.status }), {})
   );
 
   useEffect(() => {
     setSwitchStates(
-      filteredStores.reduce(
-        (acc, store) => ({ ...acc, [store.id]: store.status }),
-        {}
-      )
+      stores.reduce((acc, store) => ({ ...acc, [store.id]: store.status }), {})
     );
   }, [stores]);
 
@@ -106,7 +103,7 @@ function Store() {
       });
   };
 
-  const transformedstores = filteredStores.map((store) => ({
+  const transformedstores = stores.map((store) => ({
     ...store,
     statusIcon: (
       <Switch

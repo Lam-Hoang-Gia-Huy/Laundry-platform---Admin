@@ -16,9 +16,9 @@ function Home() {
   const { stores } = useContext(AppContext);
   const { orders } = useContext(AppContext);
   const { users } = useContext(AppContext);
-  const filteredStores = stores.filter(
-    (store) => store.status === "on" || store.status === "off"
-  );
+  // const filteredStores = stores.filter(
+  //   (store) => store.status === "on" || store.status === "off"
+  // );
   return (
     <div className="container-fluid">
       <div className="row d-flex justify-content-center">
@@ -31,7 +31,7 @@ function Home() {
         <StatBox
           img={store}
           text="Store"
-          value={filteredStores.length}
+          value={stores.length}
           position={"top"}
         ></StatBox>
         <StatBox
@@ -66,12 +66,10 @@ function Home() {
         </div>
 
         <div className="row d-flex justify-content-end">
-          <div className="col-sm-12 col-md-6 mt-4">
-            <div className="card shadow-1">
-              <CategoryPieChart />
-            </div>
+          <div className="col-sm-12 col-md-4 mt-5">
+            <CategoryPieChart />
           </div>
-          <div className="col-sm-12 col-md-6 mt-4 ">
+          <div className="col-sm-12 col-md-8 mt-5 ">
             <div className="card shadow-1">
               <LineChart />
             </div>

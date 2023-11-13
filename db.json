@@ -16,7 +16,7 @@
       "phone": "0866925217",
       "address": "35 Xô Viết Nghệ Tĩnh",
       "gender": "female",
-      "status": false
+      "status": true
     },
     {
       "id": 3,
@@ -268,32 +268,6 @@
   ],
   "Stores": [
     {
-      "id": 1,
-      "storename": "Giặt ủi Bình Minh",
-      "phone": "0866925217",
-      "address": "1/34 Bình Nhâm, Bình Dương",
-      "services": [
-        {
-          "serviceId": 1,
-          "service_types": "Áo thông thường",
-          "price": 21500,
-          "weight": "0-2kg"
-        },
-        {
-          "serviceId": 2,
-          "service_types": "Áo thông thường",
-          "price": 32000,
-          "weight": "2-4kg"
-        },
-        {
-          "serviceId": 2,
-          "service_types": "Áo đặc biệt",
-          "price": 20000
-        }
-      ],
-      "status": "pending"
-    },
-    {
       "id": 3,
       "storename": "Giặt ủi Tuấn Minh",
       "phone": "0866925217",
@@ -395,7 +369,7 @@
           "price": 20000
         }
       ],
-      "status": "on"
+      "status": "off"
     },
     {
       "id": 7,
@@ -863,6 +837,28 @@
           }
         }
       ]
+    }
+  ],
+  "material": [
+    {
+      "id": 1,
+      "name": "Material 1"
+    },
+    {
+      "id": 2,
+      "name": "Material 2"
+    },
+    {
+      "id": 3,
+      "name": "Material 3"
+    },
+    {
+      "id": 4,
+      "name": "Material 4"
+    },
+    {
+      "id": 5,
+      "name": "Material 5"
     }
   ]
 }
