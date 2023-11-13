@@ -35,18 +35,15 @@ function AppProvider({ children }) {
 
   React.useEffect(() => {
     axios
-      .get(
-        "https://magpie-aware-lark.ngrok-free.app/api/v1/base/material/all",
-        {
-          headers: {
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "ngrok-skip-browser-warning": "69420",
-          },
-        }
-      )
+      .get("https://magpie-aware-lark.ngrok-free.app/api/v1/base/store/all", {
+        headers: {
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": "69420",
+        },
+      })
       .then((response) => {
-        setMaterial(response.data);
+        setStores(response.data);
       })
       .catch((error) => {
         console.error(error);
