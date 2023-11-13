@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState, useSelector } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
-
 export const SidebarData = [
   {
     title: "Home",
-    path: "/",
+    path: "/home",
     icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
@@ -38,6 +37,8 @@ export const SidebarData = [
     title: "Logout",
     path: "/logout",
     icon: <BiIcons.BiLogOut />,
-    cName: "logout",
+    cName: "logout" 
   },
+  
 ];
+

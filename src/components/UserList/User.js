@@ -1,8 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-// import "../Web.css";
-=======
->>>>>>> 4654386c7cde6e551a06dbde3a9a5c11e8360551
 import { MDBDataTable } from "mdbreact";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";

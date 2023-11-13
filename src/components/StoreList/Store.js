@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
-// import "../Web.css";
-=======
->>>>>>> 4654386c7cde6e551a06dbde3a9a5c11e8360551
 import { NavLink } from "react-router-dom";
 import { MDBDataTable } from "mdbreact";
 import { Link } from "react-router-dom";
@@ -15,6 +11,7 @@ import * as ImIconS from "react-icons/im";
 
 function Store() {
   const { stores, setStores } = useContext(AppContext);
+  
   // const filteredStores = stores.filter(
   //   (store) => store.status === "on" || store.status === "off"
   // );

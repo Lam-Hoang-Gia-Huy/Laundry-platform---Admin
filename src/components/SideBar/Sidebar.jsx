@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useSelector } from "react";
 import "./SideBar.css";
 import { NavLink } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import { FaBars } from "react-icons/fa";
 
 const Sidebar = ({ children }) => {
+ 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   return (
