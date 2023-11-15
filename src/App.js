@@ -17,14 +17,18 @@ import OrderDetails from "./components/OrderList/OrderDetail";
 import StoreBio from "./components/StoreList/StoreBio";
 import StoreService from "./components/StoreList/StoreService";
 import { AppProvider } from "./ContextProvider";
+import Login from "./components/Login";
 import TagManagement from "./components/TagList/TagManagement";
+
 const App = () => {
   return (
     <BrowserRouter>
-      <Sidebar>
+    
+    <Sidebar>
         <AppProvider>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Login/>}></Route>
+            <Route path="/home" element={<Home/>} />
             <Route path="/order" element={<Order />} />
             <Route path="/store" element={<Store />} />
             <Route path="/user" element={<User />} />
@@ -50,9 +54,11 @@ const App = () => {
               }
             />
             <Route path="/OrderDetails/:id" element={<OrderDetails />} />
+            
           </Routes>
+          
         </AppProvider>
-      </Sidebar>
+        </Sidebar>
     </BrowserRouter>
   );
 };

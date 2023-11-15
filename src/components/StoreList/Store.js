@@ -11,6 +11,7 @@ import * as ImIconS from "react-icons/im";
 
 function Store() {
   const { stores, setStores } = useContext(AppContext);
+  
   // const filteredStores = stores.filter(
   //   (store) => store.status === "on" || store.status === "off"
   // );
