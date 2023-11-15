@@ -13,7 +13,16 @@ function AppProvider({ children }) {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:3000/orders")
+      .get(
+        "https://magpie-aware-lark.ngrok-free.app/api/v1/base/staff/accepted-order",
+        {
+          headers: {
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "ngrok-skip-browser-warning": "69420",
+          },
+        }
+      )
       .then((response) => {
         setOrders(response.data);
       })
@@ -49,6 +58,7 @@ function AppProvider({ children }) {
         console.error(error);
       });
   }, []);
+
   React.useEffect(() => {
     axios
       .get(

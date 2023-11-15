@@ -10,15 +10,53 @@ import { useParams } from "react-router-dom";
 import "./OrderDetail.css";
 import { BackButton } from "../BackButton/BackButton";
 import { useState } from "react";
-import { MDBIcon } from "mdb-react-ui-kit";
-import { useContext } from "react";
-import { AppContext } from "../../ContextProvider";
+import axios from "axios";
+import { Button, Timeline } from "antd";
 export default function OrderDetails() {
-  const { orders, setOrders } = useContext(AppContext);
   let { id } = useParams();
   id = Number(id);
-  const thisorder = orders.find((prod) => prod.id === id);
-  const [services, setservices] = useState(thisorder.services);
+  // const [order, setThisOrder] = useState(
+  //   orders.find((prod) => prod.id === id)
+  // );
+
+  const [order, setOrder] = useState();
+  const [item, setItem] = useState([]);
+  React.useEffect(() => {
+    axios
+      .get(`https://magpie-aware-lark.ngrok-free.app/api/v1/base/order/${id}`, {
+        headers: {
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": "69420",
+        },
+      })
+      .then((response) => {
+        setOrder(response.data);
+        setItem(response.data.items);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const statusMap = {
+    1: "Chờ xác nhận",
+    2: "Chờ lấy hàng từ khách hàng",
+    3: "Vận chuyển đến cửa hàng",
+    4: "Đang xử lý bởi cửa hàng",
+    5: "Đơn sẵn sàng vận chuyển",
+    6: "Đơn đang được giao đến khách hàng",
+    7: "Đơn đã hoàn thành",
+  };
+
+  let statusArray = [];
+  for (let i = 1; i < order?.status; i++) {
+    statusArray.push({ children: statusMap[i] });
+  }
+  if (order?.status === 7) {
+    statusArray.push({ children: statusMap[order?.status] });
+  }
+  let pendingStatus = statusMap[order?.status];
   return (
     <>
       <section className="h-100 h-custom">
@@ -34,17 +72,21 @@ export default function OrderDetails() {
                   <MDBRow>
                     <MDBCol className="mb-3">
                       <p className="small text-muted mb-1">User</p>
-                      <p>{thisorder.username}</p>
+                      <p>{order?.user.fullName}</p>
+                    </MDBCol>
+                    <MDBCol className="mb-3">
+                      <p className="small text-muted mb-1">to store</p>
+                      <p>{order?.store.name}</p>
                     </MDBCol>
                   </MDBRow>
                   <MDBRow>
                     <MDBCol className="mb-3">
                       <p className="small text-muted mb-1">Date</p>
-                      <p>{thisorder.date}</p>
+                      <p>{order?.orderDate}</p>
                     </MDBCol>
                     <MDBCol className="mb-3">
                       <p className="small text-muted mb-1">Order No.</p>
-                      <p>{thisorder.id}</p>
+                      <p>{order?.id}</p>
                     </MDBCol>
                   </MDBRow>
 
@@ -52,13 +94,13 @@ export default function OrderDetails() {
                     className="mx-n5 px-5 py-4"
                     style={{ backgroundColor: "#f2f2f2" }}
                   >
-                    {services.map((item, index) => (
+                    {item.map((item, index) => (
                       <MDBRow>
                         <MDBCol md="8" lg="9">
-                          <p>{item.service_types}</p>
+                          <p>{item.laundryService.name}</p>
                         </MDBCol>
                         <MDBCol md="4" lg="3">
-                          <p>{item.price.toLocaleString()}₫</p>
+                          <p>{item.total.toLocaleString()}₫</p>
                         </MDBCol>
                       </MDBRow>
                     ))}
@@ -69,66 +111,24 @@ export default function OrderDetails() {
                         className="lead fw-bold mb-0"
                         style={{ color: "#f37a27" }}
                       >
-                        {thisorder.totalprice.toLocaleString()}₫
+                        {order?.total.toLocaleString()}₫
                       </p>
                     </MDBCol>
                   </MDBRow>
+
                   <p
                     className="lead fw-bold mb-4 pb-2"
                     style={{ color: "#f37a27" }}
                   >
                     Tracking Order
                   </p>
-                  <MDBRow>
-                    <div className="d-flex flex-row justify-content-between align-items-center align-content-center">
-                      {thisorder.status === "washing" ? (
-                        <span className="d-flex justify-content-center align-items-center big-dot dot">
-                          <MDBIcon icon="check text-white" />
-                        </span>
-                      ) : (
-                        <span className="dot"></span>
-                      )}
 
-                      <hr className="flex-fill track-line" />
-                      {thisorder.status === "delivering" ? (
-                        <span className="d-flex justify-content-center align-items-center big-dot dot">
-                          <MDBIcon icon="check text-white" />
-                        </span>
-                      ) : (
-                        <span className="dot"></span>
-                      )}
-                      <hr className="flex-fill track-line" />
-                      {thisorder.status === "delivered" ||
-                      thisorder.status === "cancel" ? (
-                        <span className="d-flex justify-content-center align-items-center big-dot dot">
-                          {thisorder.status === "delivered" ? (
-                            <MDBIcon icon="check text-white" />
-                          ) : (
-                            <MDBIcon icon="times text-white" />
-                          )}
-                        </span>
-                      ) : (
-                        <span className="dot"></span>
-                      )}
-                    </div>
-                    <div className="d-flex flex-row justify-content-between align-items-center">
-                      <div className="d-flex flex-column align-items-start">
-                        <span>Washing</span>
-                      </div>
-
-                      <div className="d-flex flex-column justify-content-center align-items-center">
-                        <span>Shipping</span>
-                      </div>
-
-                      <div className="d-flex flex-column align-items-end">
-                        {thisorder.status === "cancel" ? (
-                          <span>Cancel</span>
-                        ) : (
-                          <span>Delivered</span>
-                        )}
-                      </div>
-                    </div>
-                  </MDBRow>
+                  <div>
+                    <Timeline
+                      pending={order?.status < 7 ? pendingStatus : null}
+                      items={statusArray}
+                    />
+                  </div>
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>

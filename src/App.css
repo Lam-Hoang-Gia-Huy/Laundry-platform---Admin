@@ -168,8 +168,8 @@
   width: 50px;
 }
 
-.hidden-column .table td:nth-child(6),
-.hidden-column .table th:nth-child(6) {
+.hidden-column .table td:nth-child(7),
+.hidden-column .table th:nth-child(7) {
   display: none;
 }
 #myDropdown {

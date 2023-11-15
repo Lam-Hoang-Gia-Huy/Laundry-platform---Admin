@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Select, Input, Button, Flex } from "antd";
 import { AppContext } from "../../ContextProvider";
 import { useContext } from "react";
+import { Typography } from "antd";
+
+const { Title } = Typography;
 
 const TagManagement = () => {
   const { material, setMaterial } = useContext(AppContext);
@@ -36,47 +39,53 @@ const TagManagement = () => {
   };
 
   return (
-    <div>
-      <h2>Material tag</h2>
-      <Select
-        mode="multiple"
-        placeholder="Inserted are removed"
-        value={selectedMaterial}
-        onChange={setSelectedMaterial}
-        onDeselect={handleMaterialDeselect}
-        style={{ marginBottom: "10px", maxWidth: "350px" }}
-        options={filteredMaterialOptions.map((item) => ({
-          value: item,
-          label: item,
-        }))}
-      />
-      <Input
-        value={inputMaterialValue}
-        onChange={(e) => setInputMaterialValue(e.target.value)}
-        placeholder="Add a new option"
-        style={{ marginBottom: "10px", width: "200px", display: "Flex" }}
-      />
-      <Button onClick={handleAddMaterial}>Add material</Button> <br></br>
-      <h2>Cloth tag</h2>
-      <Select
-        mode="multiple"
-        placeholder="Inserted are removed"
-        value={selectedCloth}
-        onChange={setSelectedCloth}
-        onDeselect={handleClothDeselect}
-        style={{ marginBottom: "10px", maxWidth: "350px" }}
-        options={filteredClothOptions.map((item) => ({
-          value: item,
-          label: item,
-        }))}
-      />
-      <Input
-        value={inputClothValue}
-        onChange={(e) => setInputClothValue(e.target.value)}
-        placeholder="Add a new option"
-        style={{ marginBottom: "10px", width: "200px", display: "Flex" }}
-      />
-      <Button onClick={handleAddCloth}>Add Cloth</Button>
+    <div className="container-fluid">
+      <div className="row d-flex justify-content-center">
+        <div style={{ flexGrow: "1" }}>
+          <Title>Material tag</Title>
+          <Select
+            mode="multiple"
+            placeholder="Inserted are removed"
+            value={selectedMaterial}
+            onChange={setSelectedMaterial}
+            onDeselect={handleMaterialDeselect}
+            style={{ marginBottom: "10px", maxWidth: "350px" }}
+            options={filteredMaterialOptions.map((item) => ({
+              value: item,
+              label: item,
+            }))}
+          />
+          <Input
+            value={inputMaterialValue}
+            onChange={(e) => setInputMaterialValue(e.target.value)}
+            placeholder="Add a new option"
+            style={{ marginBottom: "10px", width: "200px", display: "Flex" }}
+          />
+          <Button onClick={handleAddMaterial}>Add material</Button>
+        </div>
+        <div style={{ flexGrow: "1" }}>
+          <Title>Cloth tag</Title>
+          <Select
+            mode="multiple"
+            placeholder="Inserted are removed"
+            value={selectedCloth}
+            onChange={setSelectedCloth}
+            onDeselect={handleClothDeselect}
+            style={{ marginBottom: "10px", maxWidth: "350px" }}
+            options={filteredClothOptions.map((item) => ({
+              value: item,
+              label: item,
+            }))}
+          />
+          <Input
+            value={inputClothValue}
+            onChange={(e) => setInputClothValue(e.target.value)}
+            placeholder="Add a new option"
+            style={{ marginBottom: "10px", width: "200px", display: "Flex" }}
+          />
+          <Button onClick={handleAddCloth}>Add cloth</Button>
+        </div>
+      </div>
     </div>
   );
 };
