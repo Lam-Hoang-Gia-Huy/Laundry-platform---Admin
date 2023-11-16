@@ -23,42 +23,30 @@ import TagManagement from "./components/TagList/TagManagement";
 const App = () => {
   return (
     <BrowserRouter>
-    
-    <Sidebar>
-        <AppProvider>
-          <Routes>
-            <Route path="/" element={<Login/>}></Route>
-            <Route path="/home" element={<Home/>} />
-            <Route path="/order" element={<Order />} />
-            <Route path="/store" element={<Store />} />
-            <Route path="/user" element={<User />} />
-            <Route path="/storemanager" element={<StoreManager />} />
-            <Route path="/tagManagement" element={<TagManagement />} />
-            <Route path="/userDetails/:id" element={<UserProfile />} />
-            <Route
-              path="/storeDetails/:id/bio"
-              element={
-                <>
-                  <StoreProfile />
-                  <StoreBio />
-                </>
-              }
-            />
-            <Route
-              path="/storeDetails/:id/service"
-              element={
-                <>
-                  <StoreProfile />
-                  <StoreService />
-                </>
-              }
-            />
-            <Route path="/OrderDetails/:id" element={<OrderDetails />} />
-            
-          </Routes>
-          
-        </AppProvider>
-        </Sidebar>
+      <AppProvider>
+        <Routes>
+          <Route path="/" element={<Login />}></Route>
+          <Route path="/admin" element={<Sidebar />}>
+            <Route path="home" element={<Home />} />
+            <Route path="order" element={<Order />} />
+            <Route path="store">
+              <Route path="list" element={<Store />} />
+              <Route path="storemanager" element={<StoreManager />} />
+            </Route>
+            <Route path="user" element={<User />} />
+
+            <Route path="tagManagement" element={<TagManagement />} />
+            <Route path="user/:id" element={<UserProfile />} />
+
+            <Route path="store/list/:id" element={<StoreProfile />}>
+              <Route path="bio" element={<StoreBio />} />
+              <Route path="service" element={<StoreService />} />
+            </Route>
+
+            <Route path="OrderDetails/:id" element={<OrderDetails />} />
+          </Route>
+        </Routes>
+      </AppProvider>
     </BrowserRouter>
   );
 };

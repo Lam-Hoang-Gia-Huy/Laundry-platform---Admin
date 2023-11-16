@@ -16,12 +16,12 @@ function StoreBio() {
   return (
     <div className="container profile-container">
       <div className="row">
-        <div className="col-md-9 profile-info">
+        <div className="col-md-6 profile-info">
           <div className="card bio-graph-card shadow-1">
             <div className="card-body bio-graph-body">
               <h5 className="card-title bio-graph-title">Store information</h5>
               <p>
-                <strong>Name:</strong> {thisStore.storename}
+                <strong>Name:</strong> {thisStore.name}
               </p>
               <p>
                 <strong>Phone:</strong> {thisStore.phone}

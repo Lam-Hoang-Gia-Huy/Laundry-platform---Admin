@@ -1,6 +1,13 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 .container1 {
   display: flex;
   background-color: antiquewhite;
+  height: 100%; /* or min-height: 100% */
 }
 main {
   width: 100%;
@@ -10,7 +17,7 @@ main {
   background: #000;
   color: #fff;
   min-height: 100vh;
-  transition: all 0.3s;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .top_section {
   display: flex;

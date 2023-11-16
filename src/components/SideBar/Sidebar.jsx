@@ -3,9 +3,9 @@ import "./SideBar.css";
 import { NavLink } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import { FaBars } from "react-icons/fa";
+import { Outlet } from "react-router-dom";
 
 const Sidebar = ({ children }) => {
- 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   return (
@@ -38,7 +38,10 @@ const Sidebar = ({ children }) => {
           </NavLink>
         ))}
       </div>
-      <main>{children}</main>
+      <main>
+        {children}
+        <Outlet />
+      </main>
     </div>
   );
 };

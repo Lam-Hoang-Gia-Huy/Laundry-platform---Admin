@@ -17,11 +17,11 @@ function UserProfile1() {
           <div className="card profile-card">
             <div className="card-body text-center profile-heading">
               <img
-                src={"https://bootdey.com/img/Content/avatar/avatar6.png"}
-                alt=""
+                src={thisUser.image}
+                alt="avatar"
                 className="profile-image rounded-circle"
               />
-              <h5 className="card-title profile-title">{thisUser.username}</h5>
+              <h5 className="card-title profile-title">{thisUser.fullName}</h5>
             </div>
             <ul className="list-group list-group-flush profile-list">
               <li className="list-group-item active">
@@ -40,16 +40,16 @@ function UserProfile1() {
               <div className="d-flex flex-row justify-content-between">
                 <div>
                   <p>
-                    <strong>Name:</strong> {thisUser.username}
+                    <strong>Name:</strong> {thisUser.fullName}
                   </p>
                   <p>
                     <strong>Phone:</strong> {thisUser.phone}
                   </p>
                   <p>
-                    <strong>Address:</strong> {thisUser.address}
+                    <strong>email:</strong> {thisUser.email}
                   </p>
                   <p>
-                    <strong>Birthday:</strong> 13 July 1983
+                    <strong>Address:</strong> {thisUser.address}
                   </p>
                 </div>
                 <div>
@@ -59,7 +59,7 @@ function UserProfile1() {
                   <p>
                     <strong>Status: </strong>
 
-                    {thisUser.status === true ? "Enabled" : "Disabled"}
+                    {thisUser.status === 1 ? "Enabled" : "Disabled"}
                   </p>
                 </div>
               </div>

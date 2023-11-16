@@ -1,34 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { Select, Input, Button, Flex } from "antd";
+import React, { useState } from "react";
+import { Input, Button } from "antd";
 import { AppContext } from "../../ContextProvider";
 import { useContext } from "react";
 import { Typography } from "antd";
+import axios from "axios";
+import { config } from "../axios/auth-header";
+import { Tag, Space } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
+import "./TagManagement.css";
 
 const { Title } = Typography;
 
 const TagManagement = () => {
   const { material, setMaterial } = useContext(AppContext);
   const { cloth, setCloth } = useContext(AppContext);
-  const materialOptions = material.map((item) => item.name);
-  const clothOptions = cloth.map((item) => item.name);
-  const [selectedMaterial, setSelectedMaterial] = useState(materialOptions);
-  const [selectedCloth, setSelectedCloth] = useState(clothOptions);
   const [inputMaterialValue, setInputMaterialValue] = useState("");
   const [inputClothValue, setInputClothValue] = useState("");
-  const filteredMaterialOptions = materialOptions.filter(
-    (o) => !selectedMaterial.includes(o)
-  );
-  const filteredClothOptions = clothOptions.filter(
-    (o) => !selectedCloth.includes(o)
-  );
 
-  const handleAddMaterial = () => {
-    setMaterial([...material, { name: inputMaterialValue }]);
+  const handleAddMaterial = async () => {
+    const newMaterial = { id: material.length + 1, name: inputMaterialValue };
+    setMaterial([...material, newMaterial]);
     setInputMaterialValue("");
+    try {
+      const response = await axios.post(
+        "https://magpie-aware-lark.ngrok-free.app/api/v1/admin/material/create",
+        newMaterial,
+        config
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
-  const handleAddCloth = () => {
-    setCloth([...cloth, { name: inputClothValue }]);
+
+  const handleAddCloth = async () => {
+    const newCloth = { id: cloth.length + 1, name: inputClothValue };
+    setCloth([...cloth, newCloth]);
     setInputClothValue("");
+
+    try {
+      const response = await axios.post(
+        "https://magpie-aware-lark.ngrok-free.app/api/v1/admin/cloth/create",
+        newCloth,
+        config
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleMaterialDeselect = (deselectedOption) => {
@@ -39,51 +58,49 @@ const TagManagement = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row d-flex justify-content-center">
-        <div style={{ flexGrow: "1" }}>
+    <div className="tag-management-container">
+      <div className="tag-management-row">
+        <div className="tag-management-column">
           <Title>Material tag</Title>
-          <Select
-            mode="multiple"
-            placeholder="Inserted are removed"
-            value={selectedMaterial}
-            onChange={setSelectedMaterial}
-            onDeselect={handleMaterialDeselect}
-            style={{ marginBottom: "10px", maxWidth: "350px" }}
-            options={filteredMaterialOptions.map((item) => ({
-              value: item,
-              label: item,
-            }))}
-          />
+          {material.map((item, index) => (
+            <Space size={[0, 8]} wrap>
+              <Tag
+                className="tag-management-tag"
+                closeIcon={<CloseCircleOutlined />}
+              >
+                {item.name}
+              </Tag>
+            </Space>
+          ))}
           <Input
+            className="tag-management-input"
             value={inputMaterialValue}
             onChange={(e) => setInputMaterialValue(e.target.value)}
             placeholder="Add a new option"
-            style={{ marginBottom: "10px", width: "200px", display: "Flex" }}
           />
-          <Button onClick={handleAddMaterial}>Add material</Button>
+          <Button className="tag-management-button" onClick={handleAddMaterial}>
+            Add material
+          </Button>
         </div>
-        <div style={{ flexGrow: "1" }}>
+        <div className="tag-management-column">
           <Title>Cloth tag</Title>
-          <Select
-            mode="multiple"
-            placeholder="Inserted are removed"
-            value={selectedCloth}
-            onChange={setSelectedCloth}
-            onDeselect={handleClothDeselect}
-            style={{ marginBottom: "10px", maxWidth: "350px" }}
-            options={filteredClothOptions.map((item) => ({
-              value: item,
-              label: item,
-            }))}
-          />
+          {cloth.map((item, index) => (
+            <Tag
+              className="tag-management-tag"
+              closeIcon={<CloseCircleOutlined />}
+            >
+              {item.name}
+            </Tag>
+          ))}
           <Input
+            className="tag-management-input"
             value={inputClothValue}
             onChange={(e) => setInputClothValue(e.target.value)}
             placeholder="Add a new option"
-            style={{ marginBottom: "10px", width: "200px", display: "Flex" }}
           />
-          <Button onClick={handleAddCloth}>Add cloth</Button>
+          <Button className="tag-management-button" onClick={handleAddCloth}>
+            Add cloth
+          </Button>
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AppContext } from "../../ContextProvider";
 import axios from "axios";
 import * as ImIconS from "react-icons/im";
+import { config } from "../axios/auth-header";
 
 function User() {
   const { users, setUsers } = useContext(AppContext);
@@ -22,14 +23,17 @@ function User() {
 
   const handleToggle = (id) => {
     setSwitchStates((prevStates) => {
-      const newStatus = !prevStates[id];
+      const newStatus = prevStates[id] === 1 ? 2 : 1;
       axios
-        .patch(`http://localhost:3000/users/${id}`, {
-          status: newStatus,
-        })
+        .put(
+          `https://magpie-aware-lark.ngrok-free.app/api/v1/admin/user/update/${id}?status=${newStatus}`,
+          {
+            status: newStatus,
+          },
+          config
+        )
         .then((response) => {
           console.log("Success:", response.data);
-          // Update the users state with the new status
           setUsers((prevUsers) =>
             prevUsers.map((user) =>
               user.id === id ? { ...user, status: newStatus } : user
@@ -46,7 +50,10 @@ function User() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/users/${id}`)
+      .delete(
+        `https://magpie-aware-lark.ngrok-free.app/api/v1/admin/user/delete/${id}`,
+        config
+      )
       .then(() => {
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
       })
@@ -57,20 +64,14 @@ function User() {
 
   const transformedUsers = users.map((user) => ({
     ...user,
-    avatar: (
-      <img
-        src="https://bootdey.com/img/Content/avatar/avatar6.png"
-        alt="User Avatar"
-      />
-    ),
     statusIcon: (
       <Switch
-        checked={switchStates[user.id] || false}
+        checked={switchStates[user.id] === 1}
         onChange={() => handleToggle(user.id)}
         color="warning"
       />
     ),
-    details: <Link to={`/userDetails/${user.id}`}>View Details</Link>,
+    details: <Link to={`${user.id}`}>View Details</Link>,
     action: (
       <ImIconS.ImBin
         className="action-icon"
@@ -85,12 +86,12 @@ function User() {
   const columns = [
     {
       label: "AVATAR",
-      field: "avatar",
+      field: "image",
       sort: "asc",
     },
     {
       label: "USERNAME",
-      field: "username",
+      field: "fullName",
       sort: "asc",
     },
     {
@@ -128,7 +129,7 @@ function User() {
   return (
     <div className="container">
       <div className="admintitle">
-        <h2>User Management</h2>
+        <h2>Người dùng</h2>
       </div>
       <MDBDataTable
         striped

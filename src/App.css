@@ -235,13 +235,15 @@
 
 .admintitle {
   background-color: #ace43e;
-  color: #b81f1f;
+  color: #262525; /* Changed color to dark for better contrast */
   border: 2px solid #262525;
   border-radius: 15px;
   margin-right: 10px;
   font-weight: bold;
   padding: 0 5px;
   display: inline-flex;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); /* Added box-shadow for a 3D effect */
+  transition: all 0.3s ease 0s; /* Added transition for a smooth hover effect */
 }
 
 .table-stats .status-social-icon {
@@ -256,8 +258,12 @@
 }
 
 .multipage:hover {
-  background: #5885b8;
-  color: #d9d9d9;
+  background-color: #b81f1f; /* Changed background color on hover */
+  color: #fff; /* Changed text color on hover */
+  box-shadow: 0px 15px 20px rgba(183, 31, 31, 0.4); /* Increased box-shadow on hover for a lifting effect */
+  transform: translateY(
+    -7px
+  ); /* Added a slight lift (upwards shift) on hover */
 }
 .multipage:active {
   background: #5885b8;

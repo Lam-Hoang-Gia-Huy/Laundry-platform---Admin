@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "./auth/authSlice"
+import { login } from "./auth/authSlice";
 let loginschema = yup.object().shape({
   email: yup
     .string()
@@ -15,7 +15,7 @@ let loginschema = yup.object().shape({
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -32,7 +32,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/user");
+      navigate("/admin/home");
     } else {
       navigate("");
     }
@@ -80,12 +80,11 @@ const Login = () => {
               Forgot Password?
             </Link>
           </div>
-         
+
           <button
             className="border-0 px-3 py-2 text-white fw-bold w-100 text-center text-decoration-none fs-5"
             style={{ background: "#ffd333" }}
             type="submit"
-            
           >
             Login
           </button>
@@ -93,7 +92,7 @@ const Login = () => {
             Don't have any account?
             <Link to="SignUp" className="">
               Register
-            </Link>   
+            </Link>
           </div>
         </form>
       </div>

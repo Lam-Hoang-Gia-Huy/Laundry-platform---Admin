@@ -6,6 +6,7 @@ import { useState } from "react";
 import { BackButton } from "../BackButton/BackButton";
 import { useContext } from "react";
 import { AppContext } from "../../ContextProvider";
+import { Outlet } from "react-router-dom";
 function StoreProfile() {
   const { stores } = useContext(AppContext);
   let { id } = useParams();
@@ -17,15 +18,14 @@ function StoreProfile() {
   return (
     <div className="container profile-container">
       <BackButton
-        Root={thisStore.status === "pending" ? "storemanager" : "store"}
+        // Root={thisStore.status === "pending" ? "storemanager" : "store"}
+        Root={"store/list"}
       />
       <div className="row">
         <div className="col-md-3 profile-nav">
           <div className="card profile-card">
             <div className="card-body text-center profile-heading">
-              <h5 className="card-title profile-title">
-                {thisStore.storename}
-              </h5>
+              <h5 className="card-title profile-title">{thisStore.name}</h5>
             </div>
             <ul className="list-group list-group-flush profile-list">
               <li
@@ -34,7 +34,7 @@ function StoreProfile() {
                 }`}
               >
                 <Link
-                  to={`/storeDetails/${thisStore.id}/bio`}
+                  to={`/admin/store/list/${thisStore.id}/bio`}
                   onClick={() => setActiveLink("Profile")}
                 >
                   <i className="fa fa-user"></i> Profile
@@ -46,7 +46,7 @@ function StoreProfile() {
                 }`}
               >
                 <Link
-                  to={`/storeDetails/${thisStore.id}/service`}
+                  to={`/admin/store/list/${thisStore.id}/service`}
                   onClick={() => setActiveLink("Service")}
                 >
                   <i className="fa fa-calendar"></i> Service
@@ -56,6 +56,7 @@ function StoreProfile() {
           </div>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 }

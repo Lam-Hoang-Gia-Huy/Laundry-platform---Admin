@@ -2,40 +2,96 @@ import "../UserList/UserProfile/UserProfile.css";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { useContext } from "react";
-import { AppContext } from "../../ContextProvider";
+import axios from "axios";
 
 function StoreService() {
-  const { stores, setStores } = useContext(AppContext);
   let { id } = useParams();
   id = Number(id);
+  const [specialServices, setSpecialServices] = useState([]);
+  const [standardServices, setStandardServices] = useState([]);
+  React.useEffect(() => {
+    axios
+      .get(
+        `https://magpie-aware-lark.ngrok-free.app/api/v1/base/special-service/store/${id}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "ngrok-skip-browser-warning": "69420",
+          },
+        }
+      )
+      .then((response) => {
+        setSpecialServices(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
-  let thisStore;
+  React.useEffect(() => {
+    axios
+      .get(
+        `https://magpie-aware-lark.ngrok-free.app/api/v1/base/standard-service/store/${id}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "ngrok-skip-browser-warning": "69420",
+          },
+        }
+      )
+      .then((response) => {
+        setStandardServices(response.data.details);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
-  thisStore = stores.find((prod) => prod.id === id);
-
-  const [services] = useState(thisStore.services);
   return (
     <div className="container profile-container">
       <div className="row">
-        <div className="col-md-9 profile-info">
+        <div className="col-md-6 profile-info">
           <div className="card bio-graph-card shadow-1">
             <div className="card-body bio-graph-body">
               <h5 className="card-title bio-graph-title">Store's Service</h5>
-              <div className="d-flex flex-row justify-content-between">
-                {services.map((item, index) => (
-                  <div>
+              <h3>Dịch vụ quần áo đặc biệt</h3>
+              <div className="d-flex flex-row justify-content-start flex-wrap">
+                {specialServices.map((item, index) => (
+                  <div className="p-2">
                     <p>
-                      <strong>Type:</strong> {item.service_types}
+                      <strong>Type:</strong> {item.name}
                     </p>
                     <p>
-                      <strong>Price:</strong> {item.price.toLocaleString()}₫
+                      <strong>Price:</strong>{" "}
+                      {item.details[0].price.toLocaleString()}₫
                     </p>
-                    {item.weight && (
-                      <p>
-                        <strong>Weight:</strong> {item.weight}
-                      </p>
-                    )}
+                    <p>
+                      <strong>Materials: </strong>
+                      {item.materials?.map((item, index) => (
+                        <span key={index}>{item?.name} </span>
+                      ))}
+                    </p>
+                    <p>
+                      <strong>Cloth type:</strong> {item.cloth.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <h3>Dịch vụ quần áo thông thường</h3>
+              <div className="d-flex flex-row justify-content-start flex-wrap">
+                {standardServices.map((item) => (
+                  <div className="p-2">
+                    <p>
+                      <strong>From:</strong> {item.from}
+                    </p>
+                    <p>
+                      <strong>To:</strong> {item.to}
+                    </p>
+                    <p>
+                      <strong>Price:</strong> {item.price.toLocaleString()}
+                    </p>
                   </div>
                 ))}
               </div>

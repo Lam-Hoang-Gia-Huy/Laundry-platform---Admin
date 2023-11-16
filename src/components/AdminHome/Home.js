@@ -24,19 +24,19 @@ function Home() {
       <div className="row d-flex justify-content-center">
         <StatBox
           img={user}
-          text="User"
+          text="Người dùng"
           value={users.length}
           position={"top"}
         ></StatBox>
         <StatBox
           img={store}
-          text="Store"
+          text="Cửa hàng"
           value={stores.length}
           position={"top"}
         ></StatBox>
         <StatBox
           img={order}
-          text="Order"
+          text="Đơn hàng"
           value={orders.length}
           position={"top"}
         ></StatBox>
@@ -44,24 +44,24 @@ function Home() {
       <div className="row justify-content-center mt-5">
         <StatBox
           img={done}
-          text="Finish"
-          value={orders.filter((item) => item.status === "delivered").length}
+          text="Đã hoàn thành"
+          value={orders.filter((item) => item.status === 7).length}
         ></StatBox>
         <StatBox
           img={cancel}
-          text="Cancel"
-          value={orders.filter((item) => item.status === "cancel").length}
+          text="Đã huỷ"
+          value={orders.filter((item) => item.status === 0).length}
         ></StatBox>
         <div className="row justify-content-center">
           <StatBox
             img={delivering}
-            text="Delivering"
-            value={orders.filter((item) => item.status === "delivering").length}
+            text="Đang giao"
+            value={orders.filter((item) => item.status === 6).length}
           ></StatBox>
           <StatBox
             img={washing}
-            text="Washing"
-            value={orders.filter((item) => item.status === "washing").length}
+            text="Đang giặt"
+            value={orders.filter((item) => item.status === 4).length}
           ></StatBox>
         </div>
 

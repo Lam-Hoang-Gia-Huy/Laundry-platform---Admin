@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { config } from "./components/axios/auth-header";
 // Create a context
 const AppContext = React.createContext();
 
@@ -33,7 +34,10 @@ function AppProvider({ children }) {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:3000/users")
+      .get(
+        "https://magpie-aware-lark.ngrok-free.app/api/v1/admin/user/all/23",
+        config
+      )
       .then((response) => {
         setUsers(response.data);
       })
@@ -44,13 +48,10 @@ function AppProvider({ children }) {
 
   React.useEffect(() => {
     axios
-      .get("https://magpie-aware-lark.ngrok-free.app/api/v1/base/store/all", {
-        headers: {
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "ngrok-skip-browser-warning": "69420",
-        },
-      })
+      .get(
+        "https://magpie-aware-lark.ngrok-free.app/api/v1/base/store/all",
+        config
+      )
       .then((response) => {
         setStores(response.data);
       })

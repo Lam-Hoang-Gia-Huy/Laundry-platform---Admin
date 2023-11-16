@@ -93,7 +93,7 @@ function StoreManager() {
           onClick={() => handleCancelToggle(item.id)}
         />
       ),
-      details: <Link to={`/storeDetails/${item.id}/bio`}>View Details</Link>,
+      details: <Link to={`${item.id}/bio`}>View Details</Link>,
     }));
   };
 
@@ -110,11 +110,11 @@ function StoreManager() {
 
   return (
     <div className="container">
-      <NavLink to="/store" className="admintitle multipage">
-        <h2>Store List</h2>
+      <NavLink to="/admin/store/list" className="admintitle multipage">
+        <h2>Cửa hàng</h2>
       </NavLink>
-      <NavLink to="/storemanager" className="admintitle multipage">
-        <h2>Store Management</h2>
+      <NavLink to="/admin/store/storemanager" className="admintitle multipage">
+        <h2>Duyệt cửa hàng</h2>
       </NavLink>
       <MDBDataTable
         striped

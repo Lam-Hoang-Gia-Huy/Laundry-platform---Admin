@@ -11,7 +11,7 @@ import * as ImIconS from "react-icons/im";
 
 function Store() {
   const { stores, setStores } = useContext(AppContext);
-  
+
   // const filteredStores = stores.filter(
   //   (store) => store.status === "on" || store.status === "off"
   // );
@@ -55,12 +55,12 @@ function Store() {
   ];
   // First, create a state variable for the switch states.
   const [switchStates, setSwitchStates] = useState(
-    stores.reduce((acc, store) => ({ ...acc, [store.id]: store.status }), {})
+    stores?.reduce((acc, store) => ({ ...acc, [store.id]: store.status }), {})
   );
 
   useEffect(() => {
     setSwitchStates(
-      stores.reduce((acc, store) => ({ ...acc, [store.id]: store.status }), {})
+      stores?.reduce((acc, store) => ({ ...acc, [store.id]: store.status }), {})
     );
   }, [stores]);
 
@@ -105,11 +105,13 @@ function Store() {
     statusIcon: (
       <Switch
         className="custom-status-icon"
-        checked={switchStates[store.id] === "on"}
+        checked={switchStates[store.id] === 1}
         onChange={() => handleToggle(store.id)}
       />
     ),
-    details: <Link to={`/storeDetails/${store.id}/bio`}>View Details</Link>,
+    details: (
+      <NavLink to={`/admin/store/list/${store.id}/bio`}>View Details</NavLink>
+    ),
     action: (
       <ImIconS.ImBin
         className="action-icon"
@@ -130,11 +132,11 @@ function Store() {
 
   return (
     <div className="container">
-      <NavLink to="/store" className="admintitle multipage">
-        <h2>Store List</h2>
+      <NavLink to="" className="admintitle multipage">
+        <h2>Cửa hàng</h2>
       </NavLink>
-      <NavLink to="/storemanager" className="admintitle multipage">
-        <h2>Store Management</h2>
+      <NavLink to="/admin/store/storemanager" className="admintitle multipage">
+        <h2>Duyệt cửa hàng</h2>
       </NavLink>
       <MDBDataTable
         striped

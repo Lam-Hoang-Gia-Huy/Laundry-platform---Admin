@@ -28,7 +28,7 @@ function Order() {
     username: order.user.fullName,
     statusString: statusMap[order.status],
     storename: order.store.name,
-    details: <Link to={`/OrderDetails/${order.id}`}>View Details</Link>,
+    details: <Link to={`admin/OrderDetails/${order.id}`}>View Details</Link>,
   }));
 
   const columns = [
@@ -75,7 +75,7 @@ function Order() {
       <div className="row">
         <div className="col">
           <div className="admintitle">
-            <h2>Order management</h2>
+            <h2>Đơn hàng</h2>
           </div>
         </div>
         <div className="col text-right">
