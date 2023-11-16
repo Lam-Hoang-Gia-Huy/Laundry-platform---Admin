@@ -69,14 +69,15 @@ function User() {
         checked={switchStates[user.id] === 1}
         onChange={() => handleToggle(user.id)}
         color="warning"
+        className="custom-icon"
       />
     ),
-    details: <Link to={`${user.id}`}>View Details</Link>,
+    details: <Link to={`${user.id}`}>Chi tiết</Link>,
     action: (
       <ImIconS.ImBin
         className="action-icon"
         onClick={() => {
-          if (window.confirm("Are you sure you want to delete this user?")) {
+          if (window.confirm("bạn có muốn xoá người dùng này?")) {
             handleDelete(user.id);
           }
         }}
@@ -90,32 +91,32 @@ function User() {
       sort: "asc",
     },
     {
-      label: "USERNAME",
+      label: "Tên người dùng",
       field: "fullName",
       sort: "asc",
     },
     {
-      label: "PHONE",
+      label: "Số điện thoại",
       field: "phone",
       sort: "asc",
     },
     {
-      label: "ADDRESS",
+      label: "Địa chỉ",
       field: "address",
       sort: "asc",
     },
     {
-      label: "STATUS",
+      label: "Trạng thái",
       field: "statusIcon",
       sort: "asc",
     },
     {
-      label: "DETAILS",
+      label: "Thông tin",
       field: "details",
       sort: "asc",
     },
     {
-      label: "ACTION",
+      label: "Thao tác",
       field: "action",
       sort: "asc",
     },

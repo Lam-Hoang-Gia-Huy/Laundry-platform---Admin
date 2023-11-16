@@ -27,7 +27,7 @@ function UserProfile1() {
               <li className="list-group-item active">
                 <a href="#">
                   {" "}
-                  <i class="fa fa-user"></i> Profile
+                  <i class="fa fa-user"></i> Thông tin
                 </a>
               </li>
             </ul>
@@ -36,30 +36,29 @@ function UserProfile1() {
         <div className="col-md-7 profile-info">
           <div className="card bio-graph-card shadow-1">
             <div className="card-body bio-graph-body">
-              <h5 className="card-title bio-graph-title">Bio Graph</h5>
+              <h5 className="card-title bio-graph-title">
+                Thông tin người dùng
+              </h5>
               <div className="d-flex flex-row justify-content-between">
                 <div>
                   <p>
-                    <strong>Name:</strong> {thisUser.fullName}
+                    <strong>Họ và tên:</strong> {thisUser.fullName}
                   </p>
                   <p>
-                    <strong>Phone:</strong> {thisUser.phone}
+                    <strong>Số điện thoại:</strong> {thisUser.phone}
                   </p>
                   <p>
-                    <strong>email:</strong> {thisUser.email}
+                    <strong>Email:</strong> {thisUser.email}
                   </p>
                   <p>
-                    <strong>Address:</strong> {thisUser.address}
+                    <strong>Địa chỉ:</strong> {thisUser.address}
                   </p>
                 </div>
                 <div>
                   <p>
-                    <strong>Gender:</strong> {thisUser.gender}
-                  </p>
-                  <p>
-                    <strong>Status: </strong>
+                    <strong>Trang thái: </strong>
 
-                    {thisUser.status === 1 ? "Enabled" : "Disabled"}
+                    {thisUser.status === 1 ? "Hoạt động" : "Không hoạt động"}
                   </p>
                 </div>
               </div>

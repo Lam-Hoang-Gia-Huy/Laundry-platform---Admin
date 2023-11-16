@@ -37,7 +37,7 @@ function StoreProfile() {
                   to={`/admin/store/list/${thisStore.id}/bio`}
                   onClick={() => setActiveLink("Profile")}
                 >
-                  <i className="fa fa-user"></i> Profile
+                  <i className="fa fa-user"></i> Thông tin
                 </Link>
               </li>
               <li
@@ -49,7 +49,7 @@ function StoreProfile() {
                   to={`/admin/store/list/${thisStore.id}/service`}
                   onClick={() => setActiveLink("Service")}
                 >
-                  <i className="fa fa-calendar"></i> Service
+                  <i className="fa fa-calendar"></i> Dịch vụ
                 </Link>
               </li>
             </ul>

@@ -111,12 +111,20 @@
 }
 .custom-table thead > tr > th:nth-child(5) {
   padding-left: 10px;
-  width: 7%;
+  width: 10%;
+}
+.custom-table thead > tr > th:nth-child(6) {
+  padding-left: 10px;
+  width: 9%;
+}
+.custom-table thead > tr > th:nth-child(7) {
+  padding-left: 10px;
+  width: 9%;
 }
 .custom-table .custom-icon {
   display: flex;
   justify-content: center;
-  height: 6vh;
+
   margin: 0 auto;
 }
 
@@ -165,13 +173,15 @@
 }
 
 .custom-store-table .table th:nth-child(5) {
-  width: 50px;
+  width: 10%;
+}
+.custom-store-table .table th:nth-child(6) {
+  width: 9%;
+}
+.custom-store-table .table th:nth-child(7) {
+  width: 10%;
 }
 
-.hidden-column .table td:nth-child(7),
-.hidden-column .table th:nth-child(7) {
-  display: none;
-}
 #myDropdown {
   width: 200px;
   height: 40px;

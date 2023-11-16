@@ -72,6 +72,7 @@ const TagManagement = () => {
               </Tag>
             </Space>
           ))}
+          <br />
           <Input
             className="tag-management-input"
             value={inputMaterialValue}
@@ -92,6 +93,7 @@ const TagManagement = () => {
               {item.name}
             </Tag>
           ))}
+          <br />
           <Input
             className="tag-management-input"
             value={inputClothValue}

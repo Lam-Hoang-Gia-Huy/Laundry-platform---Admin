@@ -19,18 +19,15 @@ function StoreBio() {
         <div className="col-md-6 profile-info">
           <div className="card bio-graph-card shadow-1">
             <div className="card-body bio-graph-body">
-              <h5 className="card-title bio-graph-title">Store information</h5>
+              <h5 className="card-title bio-graph-title">Thông tin cửa hàng</h5>
               <p>
-                <strong>Name:</strong> {thisStore.name}
+                <strong>Tên cửa hàng:</strong> {thisStore.name}
               </p>
               <p>
-                <strong>Phone:</strong> {thisStore.phone}
+                <strong>Số điện thoại:</strong> {thisStore.phone}
               </p>
               <p>
-                <strong>Address:</strong> {thisStore.address}
-              </p>
-              <p>
-                <strong>Day created:</strong> 13 July 2023
+                <strong>Địa chỉ:</strong> {thisStore.address}
               </p>
             </div>
           </div>

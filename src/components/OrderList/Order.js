@@ -28,35 +28,35 @@ function Order() {
     username: order.user.fullName,
     statusString: statusMap[order.status],
     storename: order.store.name,
-    details: <Link to={`admin/OrderDetails/${order.id}`}>View Details</Link>,
+    details: <Link to={`admin/OrderDetails/${order.id}`}>Chi tiết</Link>,
   }));
 
   const columns = [
     {
-      label: "ID",
+      label: "No.",
       field: "id",
     },
     {
-      label: "Date",
+      label: "Ngày đặt",
       field: "orderDate",
       sort: "asc",
     },
     {
-      label: "Username",
+      label: "Tên người dùng",
       field: "username",
     },
     {
-      label: "STORENAME",
+      label: "Tên cửa hàng",
       field: "storename",
       sort: "asc",
     },
     {
-      label: "STATUS",
+      label: "Trạng thái",
       field: "statusString",
       sort: "asc",
     },
     {
-      label: "DETAILS",
+      label: "Thông tin",
       field: "details",
     },
   ];

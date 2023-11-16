@@ -18,37 +18,37 @@ function Store() {
 
   const columns = [
     {
-      label: "ID",
+      label: "No.",
       field: "id",
       sort: "asc",
     },
     {
-      label: "STORENAME",
+      label: "Tên cửa hàng",
       field: "name",
       sort: "asc",
     },
     {
-      label: "PHONE",
+      label: "Số điện thoại",
       field: "phone",
       sort: "asc",
     },
     {
-      label: "ADDRESS",
+      label: "Địa chỉ",
       field: "address",
       sort: "asc",
     },
     {
-      label: "STATUS",
+      label: "Trạng thái",
       field: "statusIcon",
       sort: "asc",
     },
     {
-      label: "Details",
+      label: "Thông tin",
       field: "details",
       sort: "asc",
     },
     {
-      label: "Action",
+      label: "Thao tác",
       field: "action",
       sort: "asc",
     },
@@ -104,20 +104,20 @@ function Store() {
     ...store,
     statusIcon: (
       <Switch
-        className="custom-status-icon"
+        className="custom-icon"
         checked={switchStates[store.id] === 1}
         onChange={() => handleToggle(store.id)}
       />
     ),
     details: (
-      <NavLink to={`/admin/store/list/${store.id}/bio`}>View Details</NavLink>
+      <NavLink to={`/admin/store/list/${store.id}/bio`}>Chi tiết</NavLink>
     ),
     action: (
       <ImIconS.ImBin
         className="action-icon"
         style={{ width: "25%" }}
         onClick={() => {
-          if (window.confirm("Are you sure you want to delete this store?")) {
+          if (window.confirm("Bạn có muốn xoá cửa hàng này")) {
             handleDelete(store.id);
           }
         }}
