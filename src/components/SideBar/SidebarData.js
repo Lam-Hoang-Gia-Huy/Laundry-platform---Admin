@@ -22,22 +22,22 @@ export const SidebarData = [
     icon: <AiIcons.AiFillShop />,
     cName: "nav-text",
   },
-  {
-    title: "Quản lý đơn hàng",
-    path: "/admin/order",
-    icon: <FaIcons.FaCartPlus />,
-    cName: "nav-text",
-  },
-  {
-    title: "Quản lý thẻ",
-    path: "/admin/tagManagement",
-    icon: <AiFillTag />,
-    cName: "nav-text",
-  },
-  {
-    title: "Logout",
-    path: "/admin/logout",
-    icon: <BiIcons.BiLogOut />,
-    cName: "logout",
-  },
+  // {
+  //   title: "Quản lý đơn hàng",
+  //   path: "/admin/order",
+  //   icon: <FaIcons.FaCartPlus />,
+  //   cName: "nav-text",
+  // },
+  // {
+  //   title: "Quản lý thẻ",
+  //   path: "/admin/tagManagement",
+  //   icon: <AiFillTag />,
+  //   cName: "nav-text",
+  // },
+  // {
+  //   title: "Logout",
+  //   path: "/admin/logout",
+  //   icon: <BiIcons.BiLogOut />,
+  //   cName: "logout",
+  // },
 ];

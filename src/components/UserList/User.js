@@ -8,9 +8,12 @@ import { AppContext } from "../../ContextProvider";
 import axios from "axios";
 import * as ImIconS from "react-icons/im";
 import { config } from "../axios/auth-header";
+import { message } from "antd";
+import { Popconfirm } from "antd";
 
 function User() {
   const { users, setUsers } = useContext(AppContext);
+  const { setStores } = useContext(AppContext);
   const [switchStates, setSwitchStates] = useState(
     users.reduce((acc, user) => ({ ...acc, [user.id]: user.status }), {})
   );
@@ -39,9 +42,17 @@ function User() {
               user.id === id ? { ...user, status: newStatus } : user
             )
           );
+          setStores((prevStores) =>
+            prevStores.map((store) =>
+              store.user.id === id
+                ? { ...store, user: { ...store.user, status: newStatus } }
+                : store
+            )
+          );
         })
         .catch((error) => {
           console.error("Error:", error);
+          message.error("Chuyển trạng thái thất bại");
         });
 
       return { ...prevStates, [id]: newStatus };
@@ -56,10 +67,16 @@ function User() {
       )
       .then(() => {
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+        message.success("Xoá tài khoản thành công!");
       })
       .catch((error) => {
         console.error(error);
+        message.error("Xoá thất bại");
       });
+  };
+
+  const confirmDelete = (id) => {
+    handleDelete(id);
   };
 
   const transformedUsers = users.map((user) => ({
@@ -74,14 +91,14 @@ function User() {
     ),
     details: <Link to={`${user.id}`}>Chi tiết</Link>,
     action: (
-      <ImIconS.ImBin
-        className="action-icon"
-        onClick={() => {
-          if (window.confirm("bạn có muốn xoá người dùng này?")) {
-            handleDelete(user.id);
-          }
-        }}
-      />
+      <Popconfirm
+        title="Bạn có muốn xoá tài khoản này?"
+        onConfirm={() => confirmDelete(user.id)}
+        okText="có"
+        cancelText="không"
+      >
+        <ImIconS.ImBin className="action-icon" style={{ width: "25%" }} />
+      </Popconfirm>
     ),
   }));
   const columns = [

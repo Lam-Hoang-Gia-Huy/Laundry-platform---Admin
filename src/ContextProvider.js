@@ -11,6 +11,12 @@ function AppProvider({ children }) {
   const [stores, setStores] = React.useState([]);
   const [material, setMaterial] = React.useState([]);
   const [cloth, setCloth] = React.useState([]);
+  const savedActiveLink = localStorage.getItem("activeLink") || "";
+  const [activeLink, setActiveLink] = React.useState(savedActiveLink);
+
+  React.useEffect(() => {
+    localStorage.setItem("activeLink", activeLink);
+  }, [activeLink]);
 
   React.useEffect(() => {
     axios
@@ -35,7 +41,7 @@ function AppProvider({ children }) {
   React.useEffect(() => {
     axios
       .get(
-        "https://magpie-aware-lark.ngrok-free.app/api/v1/admin/user/all/23",
+        "https://magpie-aware-lark.ngrok-free.app/api/v1/admin/user/all/3",
         config
       )
       .then((response) => {
@@ -63,16 +69,11 @@ function AppProvider({ children }) {
   React.useEffect(() => {
     axios
       .get(
-        "https://magpie-aware-lark.ngrok-free.app/api/v1/base/material/all",
-        {
-          headers: {
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "ngrok-skip-browser-warning": "69420",
-          },
-        }
+        "https://magpie-aware-lark.ngrok-free.app/api/v1/admin/material/all",
+        config
       )
       .then((response) => {
+        console.log(response.data);
         setMaterial(response.data);
       })
       .catch((error) => {
@@ -82,14 +83,12 @@ function AppProvider({ children }) {
 
   React.useEffect(() => {
     axios
-      .get("https://magpie-aware-lark.ngrok-free.app/api/v1/base/cloth/all", {
-        headers: {
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "ngrok-skip-browser-warning": "69420",
-        },
-      })
+      .get(
+        "https://magpie-aware-lark.ngrok-free.app/api/v1/admin/cloth/all",
+        config
+      )
       .then((response) => {
+        console.log(response.data);
         setCloth(response.data);
       })
       .catch((error) => {
@@ -110,6 +109,8 @@ function AppProvider({ children }) {
         setMaterial,
         cloth,
         setCloth,
+        activeLink,
+        setActiveLink,
       }}
     >
       {children}

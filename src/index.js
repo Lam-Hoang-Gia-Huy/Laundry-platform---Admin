@@ -5,10 +5,10 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux/es";
 import { admin } from "./components/admin";
 ReactDOM.render(
-  <Provider store = {admin}>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={admin}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </Provider>,
   document.getElementById("root")
 );

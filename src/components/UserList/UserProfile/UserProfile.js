@@ -17,11 +17,11 @@ function UserProfile1() {
           <div className="card profile-card">
             <div className="card-body text-center profile-heading">
               <img
-                src={thisUser.image}
+                src={thisUser?.image}
                 alt="avatar"
                 className="profile-image rounded-circle"
               />
-              <h5 className="card-title profile-title">{thisUser.fullName}</h5>
+              <h5 className="card-title profile-title">{thisUser?.fullName}</h5>
             </div>
             <ul className="list-group list-group-flush profile-list">
               <li className="list-group-item active">
@@ -56,9 +56,13 @@ function UserProfile1() {
                 </div>
                 <div>
                   <p>
-                    <strong>Trang thái: </strong>
+                    <strong>Trạng thái: </strong>
 
                     {thisUser.status === 1 ? "Hoạt động" : "Không hoạt động"}
+                  </p>
+                  <p>
+                    <strong>Vai trò: </strong>
+                    {thisUser.role === "STORE" ? "Cửa hàng" : "Khách hàng"}
                   </p>
                 </div>
               </div>

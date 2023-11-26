@@ -14,7 +14,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-bottom: 10px;
-  width: 150px; /* Adjust the width of the input bar */
+  width: 200px; /* Adjust the width of the input bar */
 }
 
 .tag-management-button {
@@ -40,4 +40,12 @@
   font-size: 1.5em;
   text-align: center;
   margin-bottom: 20px;
+}
+.tag-management-button:hover {
+  background-color: #244c77 !important;
+  color: white !important;
+  border: 1px solid black !important;
+}
+.tag-management-tag:hover {
+  border: 1px solid black !important;
 }

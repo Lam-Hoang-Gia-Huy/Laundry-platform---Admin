@@ -50,7 +50,7 @@ function StoreService() {
   }, []);
 
   return (
-    <div className="container profile-container">
+    <div className="container profile-container mt-0">
       <div className="row">
         <div className="col-md-12 profile-info">
           <div className="card bio-graph-card shadow-1">

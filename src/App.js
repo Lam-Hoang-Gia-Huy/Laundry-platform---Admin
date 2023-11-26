@@ -35,7 +35,7 @@ const App = () => {
             </Route>
             <Route path="user" element={<User />} />
 
-            <Route path="tagManagement" element={<TagManagement />} />
+            {/* <Route path="tagManagement" element={<TagManagement />} /> */}
             <Route path="user/:id" element={<UserProfile />} />
 
             <Route path="store/list/:id" element={<StoreProfile />}>

@@ -3,19 +3,22 @@ import StatBox from "./Component/StatBox";
 import user from "./image/user.png";
 import order from "./image/checkout.png";
 import store from "./image/store.png";
-import done from "./image/checked.png";
-import washing from "./image/laundry-machine.png";
-import cancel from "./image/multiply.png";
-import delivering from "./image/shipped.png";
+import activeUser from "./image/active-user.png";
+import materialimage from "./image/fabric-pattern.png";
+import activeStore from "./image/seller.png";
+import clothimage from "./image/clothes-hanger.png";
 import CategoryPieChart from "./Component/CategoryPieChart";
 import LineChart from "./Component/LineChart";
 import { useContext } from "react";
 import { AppContext } from "../../ContextProvider";
-
+import TagManagement from "../TagList/TagManagement";
+import ClothManagement from "../TagList/ClothManagement";
 function Home() {
   const { stores } = useContext(AppContext);
   const { orders } = useContext(AppContext);
   const { users } = useContext(AppContext);
+  const { material } = useContext(AppContext);
+  const { cloth } = useContext(AppContext);
   // const filteredStores = stores.filter(
   //   (store) => store.status === "on" || store.status === "off"
   // );
@@ -34,44 +37,46 @@ function Home() {
           value={stores.length}
           position={"top"}
         ></StatBox>
-        <StatBox
+        {/* <StatBox
           img={order}
           text="Đơn hàng"
           value={orders.length}
           position={"top"}
-        ></StatBox>
+        ></StatBox> */}
       </div>
       <div className="row justify-content-center mt-5">
         <StatBox
-          img={done}
-          text="Đã hoàn thành"
-          value={orders.filter((item) => item.status === 7).length}
+          img={activeUser}
+          text="Người dùng hoạt động"
+          value={users.filter((item) => item.status === 1).length}
         ></StatBox>
         <StatBox
-          img={cancel}
-          text="Đã huỷ"
-          value={orders.filter((item) => item.status === 0).length}
+          img={activeStore}
+          text="Cửa hàng hoạt động"
+          value={stores.filter((item) => item.user.status === 1).length}
         ></StatBox>
         <div className="row justify-content-center">
           <StatBox
-            img={delivering}
-            text="Đang giao"
-            value={orders.filter((item) => item.status === 6).length}
+            img={materialimage}
+            text="Vật liệu"
+            value={material.length}
           ></StatBox>
           <StatBox
-            img={washing}
-            text="Đang giặt"
-            value={orders.filter((item) => item.status === 4).length}
+            img={clothimage}
+            text="Loại quần áo"
+            value={cloth.length}
           ></StatBox>
         </div>
 
         <div className="row d-flex justify-content-end">
-          <div className="col-sm-12 col-md-4 mt-5">
-            <CategoryPieChart />
+          <div className="col-sm-12 col-md-6 mt-5">
+            <div className="card shadow-1" style={{ background: "#91b4ed" }}>
+              <TagManagement />
+            </div>
           </div>
-          <div className="col-sm-12 col-md-8 mt-5 ">
-            <div className="card shadow-1">
-              <LineChart />
+          <div className="col-sm-12 col-md-6 mt-5 ">
+            <div className="card shadow-1" style={{ background: "#91b4ed" }}>
+              <ClothManagement />
             </div>
           </div>
         </div>
