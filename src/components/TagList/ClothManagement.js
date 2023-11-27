@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { Typography } from "antd";
 import axios from "axios";
 import { config } from "../axios/auth-header";
-import { Tag, Space } from "antd";
+import { Tag } from "antd";
 import "./TagManagement.css";
 import { Popconfirm, message } from "antd";
 const { Title } = Typography;
@@ -13,9 +13,7 @@ const ClothManagement = () => {
   const { cloth, setCloth } = useContext(AppContext);
   const [inputClothValue, setInputClothValue] = useState("");
   const handleAddCloth = async () => {
-    const newClothState = { id: cloth.length + 1, name: inputClothValue };
     const newCloth = { name: inputClothValue };
-    setCloth([...cloth, newClothState]);
     setInputClothValue("");
     try {
       const response = await axios.post(
@@ -24,10 +22,11 @@ const ClothManagement = () => {
         config
       );
       console.log(response.data);
-      message.success("Thêm thành công!");
+      message.success("Add successfully!");
+      setCloth([...cloth, response.data]);
     } catch (error) {
       console.error(error);
-      message.error("không thể kết nối với server");
+      message.error("Cannot access to the server!");
     }
   };
   const handleClothDeselect = (id) => {
@@ -38,7 +37,8 @@ const ClothManagement = () => {
         config
       );
       console.log(response.data);
-      message.success("Xoá thành công!");
+
+      message.success("Delete successfully!");
     } catch (error) {
       console.error(error);
     }
@@ -49,7 +49,7 @@ const ClothManagement = () => {
   return (
     <div className="tag-management-row">
       <div className="tag-management-column">
-        <Title style={{ fontSize: "20px", color: "#333" }}>Loại quần áo</Title>
+        <Title style={{ fontSize: "20px", color: "#333" }}>Cloth type</Title>
         {cloth.length > 0 ? (
           <>
             {cloth.map((item, index) => (
@@ -84,7 +84,7 @@ const ClothManagement = () => {
                 fontFamily: "Arial, sans-serif",
               }}
             >
-              Không tìm thấy bất kỳ loại quần áo nào
+              Cannot find any cloth types
             </h3>
           </div>
         )}
@@ -92,7 +92,7 @@ const ClothManagement = () => {
           className="tag-management-input"
           value={inputClothValue}
           onChange={(e) => setInputClothValue(e.target.value)}
-          placeholder="Tạo thêm loại quần áo mới"
+          placeholder="Add new cloth"
           style={{ margin: "10px 0" }}
         />
         <Button
@@ -108,11 +108,11 @@ const ClothManagement = () => {
             marginTop: "10px",
           }}
         >
-          Thêm quần áo
+          Add cloth
         </Button>
         <br />
         {isClothExist && (
-          <small style={{ color: "red" }}>Đã tồn tại loại áo này</small>
+          <small style={{ color: "red" }}>Cloth type has alreay existed!</small>
         )}
       </div>
     </div>

@@ -13,6 +13,7 @@ function AppProvider({ children }) {
   const [cloth, setCloth] = React.useState([]);
   const savedActiveLink = localStorage.getItem("activeLink") || "";
   const [activeLink, setActiveLink] = React.useState(savedActiveLink);
+  const [timeCategory, setTimeCategory] = React.useState([]);
 
   React.useEffect(() => {
     localStorage.setItem("activeLink", activeLink);
@@ -84,6 +85,21 @@ function AppProvider({ children }) {
   React.useEffect(() => {
     axios
       .get(
+        "https://magpie-aware-lark.ngrok-free.app/api/v1/admin/time-category",
+        config
+      )
+      .then((response) => {
+        console.log(response.data);
+        const filteredData = response.data.filter((item) => item.status === 1);
+        setTimeCategory(filteredData);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  React.useEffect(() => {
+    axios
+      .get(
         "https://magpie-aware-lark.ngrok-free.app/api/v1/admin/cloth/all",
         config
       )
@@ -111,6 +127,8 @@ function AppProvider({ children }) {
         setCloth,
         activeLink,
         setActiveLink,
+        timeCategory,
+        setTimeCategory,
       }}
     >
       {children}

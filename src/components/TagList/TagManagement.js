@@ -18,12 +18,7 @@ const TagManagement = () => {
   // const [inputClothValue, setInputClothValue] = useState("");
 
   const handleAddMaterial = async () => {
-    const newMaterialState = {
-      id: material.length + 1,
-      name: inputMaterialValue,
-    };
     const newMaterial = { name: inputMaterialValue };
-    setMaterial([...material, newMaterialState]);
     setInputMaterialValue("");
     try {
       const response = await axios.post(
@@ -32,10 +27,11 @@ const TagManagement = () => {
         config
       );
       console.log(response.data);
-      message.success("Thêm thành công!");
+      message.success("Add successfully!");
+      setMaterial([...material, response.data]);
     } catch (error) {
       console.error(error);
-      message.error("không thể kết nối với server");
+      message.error("Cannot access to the server!");
     }
   };
 
@@ -65,7 +61,7 @@ const TagManagement = () => {
         config
       );
       console.log(response.data);
-      message.success("Xoá thành công!");
+      message.success("Delete successfully!");
     } catch (error) {
       console.error(error);
     }
@@ -158,7 +154,7 @@ const TagManagement = () => {
     // <div className="tag-management-container">
     <div className="tag-management-row">
       <div className="tag-management-column">
-        <Title style={{ fontSize: "20px", color: "#333" }}>Vật liệu</Title>
+        <Title style={{ fontSize: "20px", color: "#333" }}>Material</Title>
         {material.length > 0 ? (
           <>
             {material.map((item, index) => (
@@ -195,7 +191,7 @@ const TagManagement = () => {
                 fontFamily: "Arial, sans-serif",
               }}
             >
-              Không tìm thấy bất kỳ vật liệu nào
+              Cannot find any materials
             </h3>
           </div>
         )}
@@ -203,7 +199,7 @@ const TagManagement = () => {
           className="tag-management-input"
           value={inputMaterialValue}
           onChange={(e) => setInputMaterialValue(e.target.value)}
-          placeholder="Tạo thêm vật liệu mới"
+          placeholder="Add new material"
           style={{ margin: "10px 0" }}
         />
         <Button
@@ -219,11 +215,11 @@ const TagManagement = () => {
             marginTop: "10px",
           }}
         >
-          Thêm vật liệu
+          Add material
         </Button>
         <br />
         {isMaterialExist && (
-          <small style={{ color: "red" }}>Đã tồn tại vật liệu này</small>
+          <small style={{ color: "red" }}>Material has already existed!</small>
         )}
       </div>
     </div>

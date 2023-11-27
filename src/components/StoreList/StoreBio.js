@@ -1,9 +1,10 @@
 import "../UserList/UserProfile/UserProfile.css";
 import React from "react";
 import { useParams } from "react-router-dom";
-
 import { useContext } from "react";
 import { AppContext } from "../../ContextProvider";
+import { Card, Descriptions } from "antd";
+
 function StoreBio() {
   const { stores } = useContext(AppContext);
   let { id } = useParams();
@@ -16,41 +17,43 @@ function StoreBio() {
   return (
     <div className="container profile-container mt-0">
       <div className="col-md-9 profile-info">
-        <div className="card bio-graph-card shadow-1">
-          <div className="card-body bio-graph-body">
-            <h5 className="card-title bio-graph-title">Thông tin cửa hàng</h5>
-
-            <div className="d-flex flex-row justify-content-between">
-              <div>
-                <p>
-                  <strong>Tên cửa hàng:</strong> {thisStore?.name}
-                </p>
-                <p>
-                  <strong>Số điện thoại:</strong> {thisStore?.phone}
-                </p>
-                <p>
-                  <strong>Địa chỉ:</strong> {thisStore?.address}
-                </p>
-                <p>
-                  <strong>Tên chủ cửa hàng:</strong> {thisStore.user?.fullName}
-                </p>
-              </div>
-              <div>
-                <p>
-                  <strong>Email: </strong>
-                  {thisStore.user?.email}
-                </p>
-                <p>
-                  <strong>Trạng thái: </strong>
-
-                  {thisStore.user.status === 1
-                    ? "Hoạt động"
-                    : "Không hoạt động"}
-                </p>
-              </div>
+        <Card title="Store information">
+          {thisStore ? (
+            <Descriptions column={2}>
+              <Descriptions.Item label="Store name">
+                {thisStore?.name}
+              </Descriptions.Item>
+              <Descriptions.Item label="Email">
+                {thisStore?.user.email}
+              </Descriptions.Item>
+              <Descriptions.Item label="Phone number">
+                {thisStore?.phone}
+              </Descriptions.Item>
+              <Descriptions.Item label="Status">
+                {thisStore?.user.status === 1 ? "Active" : "Inactive"}
+              </Descriptions.Item>
+              <Descriptions.Item label="Address">
+                {thisStore?.address}
+              </Descriptions.Item>
+              <Descriptions.Item label="Owner">
+                {thisStore?.user.fullName}
+              </Descriptions.Item>
+            </Descriptions>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "20vh",
+              }}
+            >
+              <h2 style={{ color: "#6c757d", fontFamily: "Arial, sans-serif" }}>
+                This store does not exist!
+              </h2>
             </div>
-          </div>
-        </div>
+          )}
+        </Card>
       </div>
     </div>
   );

@@ -4,72 +4,75 @@ import { useParams } from "react-router-dom";
 import { BackButton } from "../../BackButton/BackButton";
 import { useContext } from "react";
 import { AppContext } from "../../../ContextProvider";
+import { Card, Descriptions, Avatar, List } from "antd";
+import { Link } from "react-router-dom";
 function UserProfile1() {
-  const { users, setUsers } = useContext(AppContext);
+  const { users } = useContext(AppContext);
   let { id } = useParams();
   id = Number(id);
   const thisUser = users.find((prod) => prod.id === id);
-  return (
+  return thisUser ? (
     <div className="container profile-container">
       <BackButton Root={"user"} />
       <div className="row">
         <div className="col-md-3 profile-nav">
-          <div className="card profile-card">
-            <div className="card-body text-center profile-heading">
-              <img
-                src={thisUser?.image}
-                alt="avatar"
-                className="profile-image rounded-circle"
-              />
-              <h5 className="card-title profile-title">{thisUser?.fullName}</h5>
+          <Card>
+            <div className="text-center">
+              <Avatar size={128} src={thisUser?.image} />
+              <h3>{thisUser?.fullName}</h3>
             </div>
-            <ul className="list-group list-group-flush profile-list">
-              <li className="list-group-item active">
-                <a href="#">
-                  {" "}
-                  <i class="fa fa-user"></i> Thông tin
-                </a>
-              </li>
-            </ul>
-          </div>
+            <List
+              itemLayout="horizontal"
+              dataSource={["Information"]}
+              renderItem={(item) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<i class="fa fa-user"></i>}
+                    title={<Link to={`/admin/user/${id}`}>{item}</Link>}
+                  />
+                </List.Item>
+              )}
+            />
+          </Card>
         </div>
         <div className="col-md-7 profile-info">
-          <div className="card bio-graph-card shadow-1">
-            <div className="card-body bio-graph-body">
-              <h5 className="card-title bio-graph-title">
-                Thông tin người dùng
-              </h5>
-              <div className="d-flex flex-row justify-content-between">
-                <div>
-                  <p>
-                    <strong>Họ và tên:</strong> {thisUser.fullName}
-                  </p>
-                  <p>
-                    <strong>Số điện thoại:</strong> {thisUser.phone}
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {thisUser.email}
-                  </p>
-                  <p>
-                    <strong>Địa chỉ:</strong> {thisUser.address}
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <strong>Trạng thái: </strong>
-
-                    {thisUser.status === 1 ? "Hoạt động" : "Không hoạt động"}
-                  </p>
-                  <p>
-                    <strong>Vai trò: </strong>
-                    {thisUser.role === "STORE" ? "Cửa hàng" : "Khách hàng"}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Card title="User information">
+            <Descriptions column={2}>
+              <Descriptions.Item label="Full name">
+                {thisUser?.fullName}
+              </Descriptions.Item>
+              <Descriptions.Item label="Status">
+                {thisUser?.status === 1 ? "Active" : "Inactive"}
+              </Descriptions.Item>
+              <Descriptions.Item label="Phone number">
+                {thisUser?.phone}
+              </Descriptions.Item>
+              <Descriptions.Item label="Role">
+                {thisUser?.role === "STORE" ? "Store" : "Customer"}
+              </Descriptions.Item>
+              <Descriptions.Item label="Email">
+                {thisUser?.email}
+              </Descriptions.Item>
+              <Descriptions.Item label="Address">
+                {thisUser?.address}
+              </Descriptions.Item>
+            </Descriptions>
+          </Card>
         </div>
       </div>
+    </div>
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "50vh",
+      }}
+    >
+      <h2 style={{ color: "#6c757d", fontFamily: "Arial, sans-serif" }}>
+        This user does not exist!
+      </h2>
     </div>
   );
 }

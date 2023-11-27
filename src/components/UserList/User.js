@@ -1,5 +1,4 @@
 import React from "react";
-import { MDBDataTable } from "mdbreact";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Switch } from "@mui/material";
@@ -10,6 +9,8 @@ import * as ImIconS from "react-icons/im";
 import { config } from "../axios/auth-header";
 import { message } from "antd";
 import { Popconfirm } from "antd";
+import { Table } from "antd";
+import { Input } from "antd";
 
 function User() {
   const { users, setUsers } = useContext(AppContext);
@@ -52,7 +53,7 @@ function User() {
         })
         .catch((error) => {
           console.error("Error:", error);
-          message.error("Chuyển trạng thái thất bại");
+          message.error("Change state unsuccessfully!");
         });
 
       return { ...prevStates, [id]: newStatus };
@@ -67,11 +68,11 @@ function User() {
       )
       .then(() => {
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
-        message.success("Xoá tài khoản thành công!");
+        message.success("Delete account successfully!");
       })
       .catch((error) => {
         console.error(error);
-        message.error("Xoá thất bại");
+        message.error("Delete account unsuccessfully!");
       });
   };
 
@@ -89,13 +90,13 @@ function User() {
         className="custom-icon"
       />
     ),
-    details: <Link to={`${user.id}`}>Chi tiết</Link>,
+    details: <Link to={`${user.id}`}>View detail</Link>,
     action: (
       <Popconfirm
-        title="Bạn có muốn xoá tài khoản này?"
+        title="Do you want to delete this user?"
         onConfirm={() => confirmDelete(user.id)}
-        okText="có"
-        cancelText="không"
+        okText="Yes"
+        cancelText="No"
       >
         <ImIconS.ImBin className="action-icon" style={{ width: "25%" }} />
       </Popconfirm>
@@ -103,61 +104,67 @@ function User() {
   }));
   const columns = [
     {
-      label: "AVATAR",
-      field: "image",
-      sort: "asc",
+      title: "Avatar",
+      dataIndex: "image",
+      key: "image",
     },
     {
-      label: "Tên người dùng",
-      field: "fullName",
-      sort: "asc",
+      title: "Username",
+      dataIndex: "fullName",
+      key: "fullName",
     },
     {
-      label: "Số điện thoại",
-      field: "phone",
-      sort: "asc",
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
-      label: "Địa chỉ",
-      field: "address",
-      sort: "asc",
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
     },
     {
-      label: "Trạng thái",
-      field: "statusIcon",
-      sort: "asc",
+      title: "Status",
+      dataIndex: "statusIcon",
+      key: "statusIcon",
     },
     {
-      label: "Thông tin",
-      field: "details",
-      sort: "asc",
+      title: "Detail",
+      dataIndex: "details",
+      key: "details",
     },
     {
-      label: "Thao tác",
-      field: "action",
-      sort: "asc",
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
     },
   ];
 
-  const data = {
-    columns: columns,
-    rows: transformedUsers,
-  };
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredUsers = transformedUsers.filter((user) =>
+    user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="container">
       <div className="admintitle">
-        <h2>Người dùng</h2>
+        <h2>User list</h2>
       </div>
-      <MDBDataTable
-        striped
-        bordered
-        small
-        data={data}
-        responsiveSm
-        noBottomColumns={true}
-        className="custom-table"
-      />
+      <div className="search-container">
+        <Input
+          placeholder="Search by username"
+          onChange={(event) => setSearchTerm(event.target.value)}
+          className="search-bar"
+        />
+      </div>
+      <div className="table-container">
+        <Table
+          columns={columns}
+          dataSource={filteredUsers}
+          rowKey="id"
+          className="user-table"
+        />
+      </div>
     </div>
   );
 }

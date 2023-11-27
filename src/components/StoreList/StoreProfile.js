@@ -19,7 +19,7 @@ function StoreProfile() {
   const location = useLocation();
 
   React.useEffect(() => {
-    if (location.pathname === `/admin/store/list/${thisStore?.id}/bio`) {
+    if (location.pathname === `/admin/store/${thisStore?.id}/bio`) {
       setActiveLink("Profile");
     }
   }, [location, thisStore]);
@@ -40,7 +40,7 @@ function StoreProfile() {
     <div className="container profile-container">
       <BackButton
         // Root={thisStore.status === "pending" ? "storemanager" : "store"}
-        Root={"store/list"}
+        Root={"store"}
       />
 
       <div style={{ display: "flex" }}>
@@ -56,10 +56,10 @@ function StoreProfile() {
                 }`}
               >
                 <Link
-                  to={`/admin/store/list/${thisStore?.id}/bio`}
+                  to={`/admin/store/${thisStore?.id}/bio`}
                   onClick={() => setActiveLink("Profile")}
                 >
-                  <i className="fa fa-user"></i> Thông tin
+                  <i className="fa fa-user"></i> Information
                 </Link>
               </li>
               <li
@@ -68,10 +68,10 @@ function StoreProfile() {
                 }`}
               >
                 <Link
-                  to={`/admin/store/list/${thisStore?.id}/service`}
+                  to={`/admin/store/${thisStore?.id}/service`}
                   onClick={() => setActiveLink("Service")}
                 >
-                  <i className="fa fa-calendar"></i> Dịch vụ
+                  <i className="fa fa-calendar"></i> Service
                 </Link>
               </li>
             </ul>

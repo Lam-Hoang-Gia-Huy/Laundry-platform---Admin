@@ -1,15 +1,13 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
-let  access_token = localStorage.getItem('access_token')
-  ? JSON.parse(localStorage.getItem('access_token'))
-  : null
+let access_token = localStorage.getItem("access_token")
+  ? JSON.parse(localStorage.getItem("access_token"))
+  : null;
 
-  
-let  userInfoDTO = localStorage.getItem('userInfoDTO')
-? JSON.parse(localStorage.getItem('userInfoDTO'))
-: null
+let userInfoDTO = localStorage.getItem("userInfoDTO")
+  ? JSON.parse(localStorage.getItem("userInfoDTO"))
+  : null;
 
 const initialState = {
   userInfoDTO,
@@ -20,7 +18,7 @@ const initialState = {
   message: "",
 };
 export const login = createAsyncThunk(
-  "auth/authenticate",
+  "auth/admin/authenticate",
   async (userData, thunkAPI) => {
     try {
       return await authService.login(userData);
@@ -40,24 +38,18 @@ export const signup = createAsyncThunk(
   }
 );
 
-
-
-
 export const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
     logout: (state) => {
-      localStorage.removeItem('userInfoDTO') 
-      localStorage.removeItem('access_token') 
-      state.userInfoDTO= null;
+      localStorage.removeItem("userInfoDTO");
+      localStorage.removeItem("access_token");
+      state.userInfoDTO = null;
       state.access_token = null;
       state.isError = false;
       state.isLoading = false;
-      state.isSuccess=false;
-      
-   
-
+      state.isSuccess = false;
     },
   },
   extraReducers: (buildeer) => {
@@ -69,7 +61,7 @@ export const authSlice = createSlice({
         state.isError = false;
         state.isLoading = false;
         state.isSuccess = true;
-        
+
         state.userInfoDTO = action.payload.userInfoDTO;
         state.access_token = action.payload.access_token;
         state.message = "success";
@@ -80,8 +72,7 @@ export const authSlice = createSlice({
         state.message = action.error;
         state.isLoading = false;
       })
-     
-      
+
       .addCase(signup.pending, (state) => {
         state.isLoading = true;
       })
@@ -97,12 +88,8 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
         state.isLoading = false;
-      })
-
-
-
+      });
   },
 });
-export const { logout } = authSlice.actions
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;
-

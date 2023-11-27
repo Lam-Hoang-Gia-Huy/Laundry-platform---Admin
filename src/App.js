@@ -18,9 +18,10 @@ import StoreBio from "./components/StoreList/StoreBio";
 import StoreService from "./components/StoreList/StoreService";
 import { AppProvider } from "./ContextProvider";
 import Login from "./components/Login";
-import TagManagement from "./components/TagList/TagManagement";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const { userInfoDTO } = useSelector((state) => state.auth);
   return (
     <BrowserRouter>
       <AppProvider>
@@ -30,7 +31,7 @@ const App = () => {
             <Route path="home" element={<Home />} />
             <Route path="order" element={<Order />} />
             <Route path="store">
-              <Route path="list" element={<Store />} />
+              <Route path="" element={<Store />} />
               <Route path="storemanager" element={<StoreManager />} />
             </Route>
             <Route path="user" element={<User />} />
@@ -38,7 +39,7 @@ const App = () => {
             {/* <Route path="tagManagement" element={<TagManagement />} /> */}
             <Route path="user/:id" element={<UserProfile />} />
 
-            <Route path="store/list/:id" element={<StoreProfile />}>
+            <Route path="store/:id" element={<StoreProfile />}>
               <Route path="bio" element={<StoreBio />} />
               <Route path="service" element={<StoreService />} />
             </Route>

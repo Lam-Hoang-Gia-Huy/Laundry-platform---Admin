@@ -1,24 +1,23 @@
-import React, { useState, useSelector } from "react";
+import React from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
-import { AiFillTag } from "react-icons/ai";
 export const SidebarData = [
   {
-    title: "Trang chủ",
+    title: "Home",
     path: "/admin/home",
     icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
   {
-    title: "Quản lý người dùng",
+    title: "User mangement",
     path: "/admin/user",
     icon: <BiIcons.BiUser />,
     cName: "nav-text",
   },
   {
-    title: "Quản lý cửa hàng",
-    path: "/admin/store/list",
+    title: "Store management",
+    path: "/admin/store",
     icon: <AiIcons.AiFillShop />,
     cName: "nav-text",
   },
